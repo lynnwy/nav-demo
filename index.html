@@ -11,7 +11,9 @@
     <header></header>
     
     <main >
-      <div class="wrapper" id='x'></div>
+        
+       
+      <div class="wrapper" id='xxx'></div>
     </main>
     <footer></footer>
     <script>
@@ -22,20 +24,20 @@
             'length':3  /*数组里面有数组*/
         }
         var hash={
-            'q':'qq.com',
+           
             'w':'weibo.com',
             'e':'ele.me',
-            'r':'renren.com',
-            't':'tianya.com',
+           
+            
             'y':'youtube.com',
-            'u':'uc.com',
+           
             'i':'iqiyi.com',
-            'o':'oprea.com',
+            'g':'game.granbluefantasy.jp',
             'p':undefined,
-            'a':'acfun.tv',
-            's':'sohu.com',
+            'x':'xiedaimala.com',
+            'b':'bilibili.com',
             'z':'zhihu.com',
-            'm':'mcdonalds.com'
+            'm':'www.mcdonalds.com.cn'
         }
         var hashInlocalStorage =JSON.parse(localStorage.getItem('aaa') || 'null')
         if(hashInlocalStorage){
@@ -44,22 +46,35 @@
         index = 0;
         while(index<keys['length']){/*0 1 2*/
             div1= document.createElement('div');
-            x.appendChild(div1);
+            div1.className='row'
+            xxx.appendChild(div1);
             row=keys[index]/*第1、2、3个数组*/
             index2=0
             while(index2<row['length']){
             z = document.createElement('kbd')
-            z.textContent =row[index2]
+            span=document.createElement('span')
+            span.textContent =row[index2]
+            span.className="text"
+            z.appendChild(span)
+            z.className='demo'
             buttonX=document.createElement('button')
             buttonX.id=row[index2]
+            img=document.createElement('img')
+            if(hash[row[index2]]){
+            img.src='http://'+hash[row[index2]]+'/favicon.ico'
+        }else{
+            img.src='//i.loli.net/2017/11/10/5a05afbc5e183.png'
+            
+        }
             buttonX.textContent ='编辑'
             buttonX.onclick=function(random){
                //random.target/*被用户点击的那个按钮*/  
                key=random['target']['id']//target是现取的数据 qwe...
-               x=prompt('给我一个网址')
-               hash[key]=x
+               xxx=prompt('给我一个网址')
+               hash[key]=xxx
                localStorage.setItem('aaa',JSON.stringify(hash))
                          }
+            z.appendChild(img)
             z.appendChild(buttonX)
             div1.appendChild(z);
             index2=index2+1
