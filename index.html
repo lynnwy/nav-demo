@@ -37,7 +37,10 @@
             'z':'zhihu.com',
             'm':'mcdonalds.com'
         }
-        
+        var hashInlocalStorage =JSON.parse(localStorage.getItem('aaa') || 'null')
+        if(hashInlocalStorage){
+            hash= hashInlocalStorage
+        }//保存进度
         index = 0;
         while(index<keys['length']){/*0 1 2*/
             div1= document.createElement('div');
@@ -47,6 +50,17 @@
             while(index2<row['length']){
             z = document.createElement('kbd')
             z.textContent =row[index2]
+            buttonX=document.createElement('button')
+            buttonX.id=row[index2]
+            buttonX.textContent ='编辑'
+            buttonX.onclick=function(random){
+               //random.target/*被用户点击的那个按钮*/  
+               key=random['target']['id']//target是现取的数据 qwe...
+               x=prompt('给我一个网址')
+               hash[key]=x
+               localStorage.setItem('aaa',JSON.stringify(hash))
+                         }
+            z.appendChild(buttonX)
             div1.appendChild(z);
             index2=index2+1
                                         }
