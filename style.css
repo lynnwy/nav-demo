@@ -55,9 +55,7 @@ kbd > button {
     right:0;
     display:none;
 }
-kbd > span{
-    
-}
+
 kbd:hover> button{
     display: inline-block;
     border-radius: 5px;
