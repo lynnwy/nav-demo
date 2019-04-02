@@ -10,9 +10,7 @@
 <body>
     <header></header>
     
-    <main >
-        
-       
+    <main>
       <div class="wrapper" id='main'></div>
     </main>
     <footer></footer>
@@ -22,69 +20,72 @@
 
     <script>
        
-
+        //初始化数据
         var hashA=init()
         var keys=hashA['keys']
         var hash=hashA['hash']
 
-
+        //创建键盘
         createKeyboard(keys,hash)
 
+        //监听用户动作
         listenUser(hash)
 
 
 
+/* ------------------以下是私有函数-------------------------------*/
 
 
 
-
-         //从localStorage中获得id
-         function getFromlocalStorage(name){
-           return JSON.parse(localStorage.getItem(name) || 'null')
-        }
         
+        function getFromlocalStorage(name){
+            return JSON.parse(localStorage.getItem(name) || 'null')
+            }
+        
+
         function init(){
-        //第一部分：初始化数据 keys hash hashInlocalStorage
-        var keys ={
+            var keys ={
             '0':['q','w','e','r','t','y','u','i','o','p'],
             '1':['a','s','d','f','g','h','j','k','l'],
             '2':['z','x','c','v','b','n','m'],
             'length':3  /*数组里面有数组*/
-        }
-        var hash={
+            }
+
+            var hash={
             'w':'weibo.com',
             'e':'ele.me',
             'q':'qq.com',
+            
             't':'tianya.com',
             'y':'youtube.com',
             'i':'iqiyi.com',
+            'f':'ff.sdo.com',
             'g':'game.granbluefantasy.jp',
             'p':undefined,
             'x':'xiedaimala.com',
             'b':'bilibili.com',
             'z':'zhihu.com',
             'm':'www.mcdonalds.com.cn'
-        }
-        var hashInlocalStorage =getFromlocalStorage('aaa')
+            }
+
+            var hashInlocalStorage =getFromlocalStorage('aaa')
             if(hashInlocalStorage){
             hash= hashInlocalStorage
-        }//保存进度
-        return{
+            }//保存进度
+
+            return{
             "keys": keys,
             "hash": hash
-        }
-}
+            }}
 
 
-
-        
         function ce(tagName,attributes){
             var element=document.createElement(tagName)
                 for(var key in attributes)/*for-in循环可以遍历一个哈希*/{
                 element[key]=attributes[key]
             }
                 return element
-        }
+            }
 
 
         function createSpan(textContent){
@@ -92,8 +93,8 @@
                 span.textContent =textContent
                 span.className="text"
                 return span
+            }
 
-        }
 
         function createButton(id){
 			var button = ce('button')
@@ -112,29 +113,26 @@
 				}
 				localStorage.setItem('aaa', JSON.stringify(hash))
 			}
-			return button
-		}
+			    return button
+		    }
+
 
         function createImg(src){
             var img=ce('img')
                 if(src){
-                img.src='http://'+src+'/favicon.ico'
+                    img.src='http://'+src+'/favicon.ico'
                 }else{
-                img.src='//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                    img.src='//i.loli.net/2017/11/10/5a05afbc5e183.png'
                 }
-                img.onerror=function(err){
-                err.target.src='//i.loli.net/2017/11/10/5a05afbc5e183.png'
+                    img.onerror=function(err){
+                    err.target.src='//i.loli.net/2017/11/10/5a05afbc5e183.png'
                 }
                 return img
-        }
+                }
 
-      
 
-        function createKeyboard(keys,hash){
-
-                //第二部分：生成键盘
+        function createKeyboard(keys,hash){   
             for(var index=0;index < keys['length'];index++){
-                //声明div1
                 var div1= ce('div')
                 div1.className='row'
 
@@ -142,28 +140,23 @@
 
                 var row=keys[index]/*第1、2、3个数组*/
                 for(var index2=0;index2<row['length'];index2++){
-
-                var span = createSpan(row[index2])
+                    var span = createSpan(row[index2])
                
-                var z = ce('kbd')
-                z.className='demo'
+                    var z = ce('kbd')
+                    z.className='demo'
                
-                var buttonX=createButton(row[index2])
+                    var buttonX=createButton(row[index2])
               
-                var img=createImg(hash[row[index2]]) 
+                    var img=createImg(hash[row[index2]]) 
 
                 
                 div1.appendChild(z);
                 z.appendChild(img)
                 z.appendChild(span)
-                z.appendChild(buttonX)
-                
-                
-            }
-            }
-            
-            }
+                z.appendChild(buttonX)             
+                }}}
         
+
         function listenUser(hash){ 
             document.onkeypress = function(random/*名字随便取*/){
             var key = random['key']/*知道用户按的是什么键了*/
